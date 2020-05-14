@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Airbnb & Housing Affordability in NYC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+
+    <!-- rj add -->
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/style3.css" >
+    <!-- js -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- rectbin -->
+    <script src="https://cdn.rawgit.com/fabid/d3-rectbin/master/rectbin.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+
+    <style type="text/css">
+    
+    </style>
+
+</head>
+<body>
+    <!------------------Intro Section------------------------->
+    <section class='first_Section' style="height:900px">
+        <img class='cover' src='pic/cover.png'>
+        <div style="height:200px"></div>
+        <h1 class='title' style='margin-left: 100px; font-size:6em; color:white'> <span style="color:#e43f5a">AIRBNB</span> and </h1>
+        <h1 class='title' style='float:right; margin-right: 200px; padding-top: 0px; font-size:5em; color:white'>Housing Afforability</h1>
+    </section>
+
+    <!------------------chart1------------------------->
+    <section class="Intro">
+        <div class="content">
+            <div class="Intro_text" style="margin-top:-20px">
+                <h1 style="color:white; font-size:3.5em">AIRBNB'S FAST GROWTH</h1>
+                <h2 style="color:#e43b59; ">Airbnb’s number has grown dramatically in the past years in the New York City</h2>
+            </div>
+            <div class="pic">
+                <div id="chart1"></div>
+            </div>
+    </section>
+
+    <!------------------chart2------------------------->
+    <section class="Intro">
+        <div class="content">
+            <div class="Intro_text">
+                <h1 style="color:white; font-size:3.5em" id="matrix_text_1">DISPLACED LONG-TERM RENTAL UNITS</h1>
+                <h2 style="color:#e43b59" id="matrix_text_2">
+                    The affordable long-term rental units were displaced by the growing airbnb units.
+                    <br><br>According to the report of Airbnb, between 2011 and 2017, New York City
+                    <span style="color:white">lost nearly 183,000 affordable units</span>
+                    of housing which were renting for less than $1,000, which accounts for around <span style="color:white">40%</span> of the total number
+                    <br><br>
+                    <b style="color: #e43f5a; font-size: 16px; margin-right: 3px"> Units lost to Airbnb</b>
+                    <br>
+                    <b style="color: grey; font-size: 16px; margin-right: 3px"> Units Remained in Long-term Rental Market</b>
+                </h2>
+            </div>
+            <div class="pic" , id="matrix"></div>
+        </div>
+    </section>
+
+    <!------------------Chart 3------------------------->
+    <!-- <section class="Intro">
+        <div class="content">
+            <div class="Intro_text">
+                <h2>
+                    Not all housing units removed from the long-term market were fully occupied.
+                    <span>Only 38%</span>
+                    Percent of revenue to hosts renting unit(s) for
+                    <span>more than half the year.</span>
+                </h2>
+            </div>
+            <div class="pic">
+                <img class="chart_pic" src="pic/chart3.png">
+            </div>
+        </div>
+    </section> -->
+
+    <section class="Intro">
+        <div class="content">
+            <div class="Intro_text">
+                <h1 style="color:white; font-size:3.5em">LARGE AMOUNT OF VACANT AIRBNBS</h1>
+                <h2 style="color:#e43b59">
+                    However, not all the housing units transferred to the Airbnb market have been used effectively<br>
+                    <br>From 2015 to 2018, the number of vacant Airbnb had grown quickly
+                </h2>
+            </div>
+            <div class="pic3">
+                <h2 id="chart3_des" style='color:white'>Hover to show number of units in each grid</h2>
+                <p style='color:white'>*Vacancy Rate = Days Available on the Airbnb Platform / 365</p>
+                <div id="Test"></div>
+                <div id="sliderContainer">
+                    <input id="timeslide" type="range" min="0" max="3" value="3" step="1" /><br>
+                    <span id='range'>2018</span>
+                </div>
+                <div id="chart3"></div>
+
+                <!-- <img class="chart_pic" src="pic/chart3.png"> -->
+            </div>
+        </div>
+    </section>
+    <!------------------d3_map Section1------------------------->
+    <section class="Intro">
+        <div class="content" style="height:1000px">
+            <div class="main"></div>
+            <div class="Intro_text" style="position:absolute; margin-top:80px; width:50%">
+                <h1 style="color:white; font-size:3.5em">VACANT <br> AIRBNB </h1>
+                <div>
+                    <div style="color:#e43b59">
+                        <h2 style="color:#e43b59">In 2018, among all 48853 Airbnb listings:<br> A large number </span> of them are vacant for longer than 60%</span> days of the year </span>
+                    </div>
+                    <p style="color:white">
+                        Percentage of Vacant Days
+                        </h2>
+                </div>
+                <button class="filter_circle" id="0" style="background-color: #083472"> 0% - 20%</button>
+                <button class="filter_circle" id="0.2" style="background-color: #1059a1"> 20% - 40%</button>
+                <button class="filter_circle" id="0.4" style="background-color: #3c8bc3"> 40% - 60%</button>
+                <button class="filter_circle" id="0.6" style="background-color: #82bbdb"> 60% - 80%</button>
+                <button class="filter_circle" id="0.8" style="background-color: #ddeaf6"> 80% - 100% </button>
+            </div>
+        </div>
+    </section>
+    <div style="height:200px"></div>
+
+    <!------------------d3_map Section2------------------------->
+    <section class="Intro">
+        <div class="content" style="height:1000px">
+            <div id="map_afford"></div>
+
+            <div class="Intro_text" style="position:absolute; margin-top:50px; width:40%; ">
+                <h1 style="color:white; font-size:3.5em">HOUSING <br>AFFORDABILITY</h1>
+                <p style="font-size:0.7em; color: white;">Percentage of People Whose Rents Account For More Than 30% Percent of Their Income</p>
+                <div id="legend"></div>
+
+                <button class="filter_path" id="all" style="background-color: #ffffff;">All</button>
+                <button class="filter_path" id="0" style="background-color: #ffc0b9">0 - 30%</button>
+                <button class="filter_path" id="33" style="background-color: #fb4a4a">30% - 60%</button>
+                <button class="filter_path" id="66" style="background-color: #ad0007">50% - 90%</button>
+            </div>
+        </div>
+    </section>
+    <div style="height:200px"></div>
+
+
+    <!------------------Mapbox Section------------------------->
+    <section class="Intro">
+        <div id='map'>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <h1 align="center" style="font-size:3.5em; color: white;">MAPPING AFFORDABILITY WITH VACANCY HEATMAP</h1>
+            <p align="center"><iframe src="swipemap.html" style="border:none; width: 99%; height: 1000px"></iframe></p>
+        </div>
+    </section>
+
+    <div id="set_height"></div>
+
+    <!-- Load JS libraries: jQuery, bootstrap, D3 -->
+    <!--<script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/topojson.v2.min.js"></script>
+    <script src="js/d3-scale-chromatic.v1.min.js"></script>-->
+    <script src="js/main.js"></script>
+    <script src="js/3_chart.js"></script>
+
+
+</body>
+</html>
